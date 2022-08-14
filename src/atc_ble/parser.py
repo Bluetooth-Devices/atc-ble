@@ -7,10 +7,9 @@ MIT License applies.
 """
 from __future__ import annotations
 
-from enum import Enum
 import logging
-from struct import unpack
 import sys
+from struct import unpack
 from typing import Any
 
 from bluetooth_sensor_state_data import BluetoothData
@@ -113,9 +112,7 @@ class ATCBluetoothDeviceData(BluetoothData):
             self.update_predefined_sensor(
                 SensorLibrary.TEMPERATURE__CELSIUS, temp / 100
             )
-            self.update_predefined_sensor(
-                SensorLibrary.HUMIDITY__PERCENTAGE, hum / 100
-            )
+            self.update_predefined_sensor(SensorLibrary.HUMIDITY__PERCENTAGE, hum / 100)
             self.update_predefined_sensor(
                 SensorLibrary.VOLTAGE__ELECTRIC_POTENTIAL_VOLT, volt / 1000
             )
@@ -147,12 +144,8 @@ class ATCBluetoothDeviceData(BluetoothData):
 
             (temp, hum, bat, volt, packet_id) = unpack(">hBBHB", data[6:])
 
-            self.update_predefined_sensor(
-                SensorLibrary.TEMPERATURE__CELSIUS, temp / 10
-            )
-            self.update_predefined_sensor(
-                SensorLibrary.HUMIDITY__PERCENTAGE, hum
-            )
+            self.update_predefined_sensor(SensorLibrary.TEMPERATURE__CELSIUS, temp / 10)
+            self.update_predefined_sensor(SensorLibrary.HUMIDITY__PERCENTAGE, hum)
             self.update_predefined_sensor(
                 SensorLibrary.VOLTAGE__ELECTRIC_POTENTIAL_VOLT, volt / 1000
             )
@@ -162,8 +155,10 @@ class ATCBluetoothDeviceData(BluetoothData):
             # Parse BLE message in ATC pvvx/custom format with encryption
             # https://github.com/pvvx/ATC_MiThermometer
             if sys.platform == "darwin":
-                _LOGGER.warning("Encrypted ATC pvvx/custom format is not supported on macOS, "
-                                "use another advertising format")
+                _LOGGER.warning(
+                    "Encrypted ATC pvvx/custom format is not supported on macOS, "
+                    "use another advertising format"
+                )
                 return False
 
             self.mac_known = True
@@ -194,8 +189,10 @@ class ATCBluetoothDeviceData(BluetoothData):
             # Parse BLE message in atc1441 format with encryption
             # https://github.com/atc1441/ATC_MiThermometer
             if sys.platform == "darwin":
-                _LOGGER.warning("Encrypted ATC atc1441 format is not supported on macOS, "
-                                "use another advertising format")
+                _LOGGER.warning(
+                    "Encrypted ATC atc1441 format is not supported on macOS, "
+                    "use another advertising format"
+                )
                 return False
 
             self.mac_known = True
@@ -209,16 +206,12 @@ class ATCBluetoothDeviceData(BluetoothData):
             else:
                 temp = decrypted_data[0] / 2 - 40.0
                 hum = decrypted_data[1] / 2
-                bat = decrypted_data[2] & 0x7f
+                bat = decrypted_data[2] & 0x7F
                 trg = decrypted_data[2] >> 7
                 if bat > 100:
                     bat = 100
-                self.update_predefined_sensor(
-                    SensorLibrary.TEMPERATURE__CELSIUS, temp
-                )
-                self.update_predefined_sensor(
-                    SensorLibrary.HUMIDITY__PERCENTAGE, hum
-                )
+                self.update_predefined_sensor(SensorLibrary.TEMPERATURE__CELSIUS, temp)
+                self.update_predefined_sensor(SensorLibrary.HUMIDITY__PERCENTAGE, hum)
                 self.update_predefined_sensor(SensorLibrary.BATTERY__PERCENTAGE, bat)
 
                 # ToDo: binary sensors
@@ -231,9 +224,7 @@ class ATCBluetoothDeviceData(BluetoothData):
         self.set_device_sw_version(firmware)
         return True
 
-    def _decrypt_atc(
-        self, data: bytes, atc_mac: bytes
-    ) -> bytes | None:
+    def _decrypt_atc( self, data: bytes, atc_mac: bytes) -> bytes | None:
         """Decrypt ATC BLE encrypted advertisements"""
         if not self.bindkey:
             self.bindkey_verified = False

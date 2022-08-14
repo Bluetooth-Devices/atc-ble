@@ -53,7 +53,9 @@ def test_can_create():
 def test_atc1441_no_encryption(caplog):
     """Test ATC parser for LYWSD03MMC with atc1441 firmware without encryption."""
     data_string = b'\xa4\xc18\x8d\x18\xb2\x01\x12/d\x0c\xa0%'
-    advertisement = bytes_to_service_info(data_string, local_name="ATC_8D18B2", address="A4:C1:38:8D:18:B2")
+    advertisement = bytes_to_service_info(
+        data_string, local_name="ATC_8D18B2", address="A4:C1:38:8D:18:B2"
+    )
 
     device = ATCBluetoothDeviceData()
     assert device.update(advertisement) == SensorUpdate(
@@ -117,7 +119,9 @@ def test_atc1441_no_encryption(caplog):
 def test_atc_pvvx_no_encryption(caplog):
     """Test ATC parser for LYWSD03MMC with pvvx custom firmware without encryption."""
     data_string = b'\xb2\x18\x8d8\xc1\xa4Y\n\xad\x13\xb6\t\x1f\x1e\x05'
-    advertisement = bytes_to_service_info(data_string, local_name="ATC_8D18B2", address="A4:C1:38:8D:18:B2")
+    advertisement = bytes_to_service_info(
+        data_string, local_name="ATC_8D18B2", address="A4:C1:38:8D:18:B2"
+    )
 
     device = ATCBluetoothDeviceData()
     assert device.update(advertisement) == SensorUpdate(
@@ -182,7 +186,9 @@ def test_atc_pvvx_with_encryption(caplog):
     """Test ATC parser for LYWSD03MMC with pvvx firmware with encryption."""
     bindkey = "b9ea895fac7eea6d30532432a516f3a3"
     data_string = b'\x11\xd6\x03\xfb\xfa{m\xfb\x1e&\xfd'
-    advertisement = bytes_to_service_info(data_string, local_name="ATC_8D18B2", address="A4:C1:38:8D:18:B2")
+    advertisement = bytes_to_service_info(
+        data_string, local_name="ATC_8D18B2", address="A4:C1:38:8D:18:B2"
+    )
 
     device = ATCBluetoothDeviceData(bindkey=bytes.fromhex(bindkey))
     assert device.update(advertisement) == SensorUpdate(
@@ -239,7 +245,9 @@ def test_atc1441_with_encryption(caplog):
     """Test ATC parser for LYWSD03MMC with atc1441 firmware with encryption."""
     bindkey = "b9ea895fac7eea6d30532432a516f3a3"
     data_string = b'X\xe9\xe6Ue\x81\xb3\xf9'
-    advertisement = bytes_to_service_info(data_string, local_name="ATC_8D18B2", address="A4:C1:38:8D:18:B2")
+    advertisement = bytes_to_service_info(
+        data_string, local_name="ATC_8D18B2", address="A4:C1:38:8D:18:B2"
+    )
 
     device = ATCBluetoothDeviceData(bindkey=bytes.fromhex(bindkey))
     assert device.update(advertisement) == SensorUpdate(
