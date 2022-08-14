@@ -224,7 +224,7 @@ class ATCBluetoothDeviceData(BluetoothData):
         self.set_device_sw_version(firmware)
         return True
 
-    def _decrypt_atc( self, data: bytes, atc_mac: bytes) -> bytes | None:
+    def _decrypt_atc(self, data: bytes, atc_mac: bytes) -> bytes | None:
         """Decrypt ATC BLE encrypted advertisements"""
         if not self.bindkey:
             self.bindkey_verified = False
@@ -237,8 +237,8 @@ class ATCBluetoothDeviceData(BluetoothData):
             return None
 
         # prepare the data for decryption
-        len_byte = (len(data) + 3).to_bytes(1, 'little')
-        uuid_bytes = b'\x16\x1a\x18'
+        len_byte = (len(data) + 3).to_bytes(1, "little")
+        uuid_bytes = b"\x16\x1a\x18"
         nonce = b"".join([atc_mac[::-1], len_byte, uuid_bytes, data[:1]])
         cipherpayload = data[1:-4]
 
