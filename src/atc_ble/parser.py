@@ -119,11 +119,11 @@ class ATCBluetoothDeviceData(BluetoothData):
             self.update_predefined_sensor(SensorLibrary.BATTERY__PERCENTAGE, bat)
 
             # ToDo: binary sensors
-            result = {
-                "switch": (trg >> 1) & 1,
-                "opening": (~trg ^ 1) & 1,
-                "status": "opened",
-            }
+            # result = {
+            #     "switch": (trg >> 1) & 1,
+            #     "opening": (~trg ^ 1) & 1,
+            #     "status": "opened",
+            # }
         elif msg_length == 13:
             # Parse BLE message in ATC1441 format without encryption
             # https://github.com/atc1441/ATC_MiThermometer
@@ -180,11 +180,11 @@ class ATCBluetoothDeviceData(BluetoothData):
                 self.update_predefined_sensor(SensorLibrary.BATTERY__PERCENTAGE, bat)
 
                 # ToDo: binary sensors
-                result = {
-                    "switch": (trg >> 1) & 1,
-                    "opening": (~trg ^ 1) & 1,
-                    "status": "opened",
-                }
+                # result = {
+                #     "switch": (trg >> 1) & 1,
+                #     "opening": (~trg ^ 1) & 1,
+                #     "status": "opened",
+                # }
         elif msg_length == 8:
             # Parse BLE message in atc1441 format with encryption
             # https://github.com/atc1441/ATC_MiThermometer
@@ -215,7 +215,7 @@ class ATCBluetoothDeviceData(BluetoothData):
                 self.update_predefined_sensor(SensorLibrary.BATTERY__PERCENTAGE, bat)
 
                 # ToDo: binary sensors
-                result = {"switch": trg}
+                # result = {"switch": trg}
         else:
             return False
         identifier = service_info.address
