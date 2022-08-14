@@ -209,7 +209,7 @@ class ATCBluetoothDeviceData(BluetoothData):
                 temp = decrypted_data[0] / 2 - 40.0
                 hum = decrypted_data[1] / 2
                 bat = decrypted_data[2] & 0x7F
-                trg = decrypted_data[2] >> 7
+                trg = decrypted_data[2] >> 7  # noqa: F841
                 if bat > 100:
                     bat = 100
                 self.update_predefined_sensor(SensorLibrary.TEMPERATURE__CELSIUS, temp)
