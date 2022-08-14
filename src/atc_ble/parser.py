@@ -107,7 +107,9 @@ class ATCBluetoothDeviceData(BluetoothData):
                 )
                 return False
 
-            (temp, hum, volt, bat, packet_id, trg) = unpack("<hHHBBB", data[6:])
+            (temp, hum, volt, bat, packet_id, trg) = unpack(
+                "<hHHBBB", data[6:]
+            )  # noqa: F841
 
             self.update_predefined_sensor(
                 SensorLibrary.TEMPERATURE__CELSIUS, temp / 100
@@ -170,7 +172,7 @@ class ATCBluetoothDeviceData(BluetoothData):
             if decrypted_data is None:
                 return False
             else:
-                (temp, hum, bat, trg) = unpack("<hHBB", decrypted_data)
+                (temp, hum, bat, trg) = unpack("<hHBB", decrypted_data)  # noqa: F841
                 self.update_predefined_sensor(
                     SensorLibrary.TEMPERATURE__CELSIUS, temp / 100
                 )
