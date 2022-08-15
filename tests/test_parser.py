@@ -35,6 +35,7 @@ def mock_platform():
 def bytes_to_service_info(
     payload: bytes, local_name: str, address: str = "00:00:00:00:00:00"
 ) -> BluetoothServiceInfo:
+    """Convert bytes to service info"""
     return BluetoothServiceInfo(
         name=local_name,
         address=address,
