@@ -30,7 +30,7 @@
   <img src="https://img.shields.io/pypi/l/atc-ble.svg?style=flat-square" alt="License">
 </p>
 
-ATC BLE support
+BLE support for sensors with ATC firmware
 
 ## Installation
 
