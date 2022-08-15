@@ -21,7 +21,7 @@ _LOGGER = logging.getLogger(__name__)
 
 
 def short_address(address: str) -> str:
-    """Convert a Bluetooth address to a short address."""
+    """Convert a Bluetooth address to a short address"""
     results = address.replace("-", ":").split(":")
     if len(results[-1]) == 2:
         return f"{results[-2].upper()}{results[-1].upper()}"
