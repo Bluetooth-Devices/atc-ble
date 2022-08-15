@@ -30,7 +30,7 @@
   <img src="https://img.shields.io/pypi/l/atc-ble.svg?style=flat-square" alt="License">
 </p>
 
-BLE parser for sensors with ATC custom firmware
+BLE parser for Xiaomi sensors with ATC custom firmware
 
 ## Installation
 
