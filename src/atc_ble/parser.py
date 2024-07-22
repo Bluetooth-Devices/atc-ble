@@ -5,6 +5,7 @@ https://github.com/Ernst79/bleparser/blob/ac8757ad64f1fc17674dcd22111e547cdf2f20
 
 MIT License applies.
 """
+
 from __future__ import annotations
 
 import logging
